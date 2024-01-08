@@ -24,6 +24,7 @@ export default async (req, res) => {
           quality: "highestvideo", // Selects the highest quality video-only format
           filter: (format) => format.container === "mp4",
         });
+        console.log("Stream is - ", stream);
         stream.pipe(res);
       } else if (format === "mp3") {
         res.setHeader(
@@ -51,4 +52,10 @@ export default async (req, res) => {
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }
+};
+
+export const config = {
+  api: {
+    responseLimit: "1024mb",
+  },
 };
