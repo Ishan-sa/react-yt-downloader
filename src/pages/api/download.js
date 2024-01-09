@@ -24,8 +24,8 @@ export default async (req, res) => {
           quality: "highestvideo", // Selects the highest quality video-only format
           filter: (format) => format.container === "mp4",
         });
-        console.log("Stream is - ", stream);
         stream.pipe(res);
+        console.log("Stream is - ", stream);
       } else if (format === "mp3") {
         res.setHeader(
           "Content-Disposition",
@@ -41,6 +41,7 @@ export default async (req, res) => {
           .audioBitrate(128)
           .toFormat("mp3")
           .pipe(res, { end: true });
+        console.log("Audio is - ", stream);
       } else {
         // Handle MP3 or other formats
         res.status(400).json({ message: "Format not supported" });

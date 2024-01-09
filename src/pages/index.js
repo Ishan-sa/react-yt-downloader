@@ -1,10 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
 
 export default function Home() {
   const [url, setUrl] = useState("");
   const [format, setFormat] = useState("mp4");
   const [videoInfo, setVideoInfo] = useState(null);
+  const [progress, setProgress] = useState(0);
 
   const handleUrlChange = async (e) => {
     setUrl(e.target.value);
@@ -55,7 +55,7 @@ export default function Home() {
             type="text"
             value={url}
             onChange={handleUrlChange}
-            className="w-full p-2 border border-gray-300 rounded text-gray-800 focus:outline-none focus:border-blue-500"
+            className="w-full p-2 border border-gray-300 rounded text-white focus:outline-none focus:border-blue-500"
             placeholder="Enter YouTube URL"
           />
           <div>
@@ -88,6 +88,14 @@ export default function Home() {
             Download
           </button>
         </form>
+        {progress > 0 && (
+          <progress
+            className="progress w-56 my-4"
+            value={progress}
+            max="100"
+          ></progress>
+        )}
+        {/* <progress className="progress w-56"></progress> */}
         {videoInfo && (
           <div className="mt-4">
             <iframe
