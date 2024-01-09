@@ -99,7 +99,7 @@ export default function Home() {
             max="100"
           ></progress>
         )}
-        {/* <progress className="progress w-56"></progress> */}
+
         {videoInfo && (
           <div className="mt-4">
             <iframe
