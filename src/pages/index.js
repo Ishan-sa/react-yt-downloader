@@ -4,7 +4,7 @@ export default function Home() {
   const [url, setUrl] = useState("");
   const [format, setFormat] = useState("mp4");
   const [videoInfo, setVideoInfo] = useState(null);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(false);
 
   const handleUrlChange = async (e) => {
     setUrl(e.target.value);
@@ -25,6 +25,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setProgress(true);
     try {
       const response = await fetch("/api/download", {
         method: "POST",
@@ -42,8 +43,11 @@ export default function Home() {
       document.body.appendChild(link);
       link.click();
       link.remove();
+
+      setProgress(false);
     } catch (error) {
       console.error("Error downloading file:", error);
+      setProgress(false);
     }
   };
 
